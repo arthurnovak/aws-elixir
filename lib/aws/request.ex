@@ -64,7 +64,7 @@ defmodule AWS.Request do
         %Client{} = client,
         %{} = metadata,
         http_method,
-        path,
+        _path,
         query,
         headers,
         input,
@@ -78,7 +78,7 @@ defmodule AWS.Request do
 
     url =
       client
-      |> build_uri(host, path)
+      |> build_uri(host)
       |> add_query(query, client)
       |> to_string()
 
@@ -121,7 +121,7 @@ defmodule AWS.Request do
 
     headers = add_headers(additional_headers, headers)
 
-    headers = Signature.sign_v4(client, now(), http_method, url, headers, payload)
+#    headers = Signature.sign_v4(client, now(), http_method, url, headers, payload)
 
     {response_header_parameters, options} = Keyword.pop(options, :response_header_parameters)
 
